@@ -1,0 +1,58 @@
+#include <iostream>
+#include <windows.h>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    bool x=1;
+    char nazwa [100];
+    do
+    {
+        cout<<"podaj nazwe pliku: "; cin>>nazwa;
+        ifstream plik;
+        plik.open(nazwa);
+            x=plik.good();
+        if(x==0) plik.close();
+    }while(x==0);
+    cout<<"co chcesz zrobic:"<<endl;
+    int odp;
+    cout<<"1. policzyc linijki"<<endl;
+    cout<<"2. ponumerowac linijki"<<endl;
+    //cout<<"3. policzyc linijki i ponumerowac je"<<endl;
+    cin>>odp;
+    switch(odp)
+        {
+        case 1:
+            {
+                ifstream plik;
+                plik.open(nazwa);
+                string l;
+                int k=0;
+                while(getline(plik,l))
+                    k++;
+                cout<<"plik ma "<<k<<"  linijek";
+                plik.close();
+            }break;
+        case 2:
+            {
+                ifstream plik;
+                ofstream plika;
+                string l;
+                char odp[100];
+                int k=1;
+                plik.open(nazwa);
+                cout<<"jaka ma byc nazwa pliku doceclowego?"<<endl; cin>>odp;
+                plika.open(odp);
+                while(getline(plik,l))
+                {
+                    plika<<k<<"."<<l<<endl;
+                    k++;
+                }
+                plik.close();
+                plika.close();
+            }break;
+        }
+    return 0;
+}
+//tak jestem z tego dumny
